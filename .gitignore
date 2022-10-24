@@ -1,3 +1,1 @@
-Datasets/Descarga/**
-Datasets/CSVs/**
-GCS.json
+GCS.json # Credenciales para Google Cloud Storage
