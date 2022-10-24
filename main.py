@@ -30,5 +30,6 @@ onlyfiles = [f for f in listdir('./Datasets/CSVs/') if isfile(join('./Datasets/C
 
 # Subiendo archivos
 for i in range(len(onlyfiles)):
-    h.upload_to_bucket('{}'.format(onlyfiles[i]),'./Datasets/CSVs/{}'.format(onlyfiles[i]),'example_first_bucket')
-    print('Archivo {}'.format(onlyfiles[i]), 'subido!')
+    if onlyfiles[i] != '.gitkeep':
+        h.upload_to_bucket('{}'.format(onlyfiles[i]),'./Datasets/CSVs/{}'.format(onlyfiles[i]),'example_first_bucket')
+        print('Archivo {}'.format(onlyfiles[i]), 'subido!')
