@@ -6,13 +6,13 @@ import os
 from google.cloud import storage
 
 # Descargar archivos de una url
-for i in range(4):
+for i in range(3):
     URL = h.urls[i]
     response = requests.get(URL)
     open("./Datasets/Descarga/{}.json.gz".format(h.filenames[i]), "wb").write(response.content)
 
 # Cargando archivos descargado en fragmentos
-for i in range(4):
+for i in range(3):
     h.getChunkDF('./Datasets/Descarga/','{}.json.gz'.format(h.filenames[i]),500000,type = '.csv')
 
 # Cargando archivos a GCS
