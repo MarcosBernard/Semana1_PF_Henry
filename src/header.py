@@ -142,3 +142,32 @@ def upload_to_bucket(blob_name,file_path,bucket_name):
     except Exception as e:
         print (e)
         return False
+
+types = [str, str, str, str, str, float, str, int, str]
+def ReemplazarNulos (filepath,filename):
+    path = os.path.join(filepath,filename)
+    df = pd.read_csv(path)
+    for i in range(df.shape[1]):
+        if (types[i] == str):
+            df.iloc[:,i] = df.iloc[:,i].fillna('sin dato')
+        elif (types[i] == float):
+            df.iloc[:,i] = df.iloc[:,i].fillna(0.0)
+        elif (types[i] == int):
+            df.iloc[:,i] = df.iloc[:,i].fillna(0)
+    return(df)
+
+def helpful_Fecha(filepath,filename):
+    path = os.path.join(filepath,filename)
+    df = pd.read_csv(path)
+    new = df["helpful"].str.split(",", n = 1, expand = True)
+    new[0]=new[0].str.replace(",","")
+    new.loc[:,0]=new.loc[:,0].map(lambda x: x.replace('[',''))
+    new.loc[:,1]=new.loc[:,1].map(lambda x: x.replace(']',''))
+    df['num_RevisionesUtiles'] = new.loc[:,0]
+    df['num_RevisionesTotales'] = new.loc[:,1]
+    df.drop(columns =["helpful"], inplace = True)
+
+    df["Fecha"] = pd.to_datetime(df['unixReviewTime'], unit='s')
+    df.drop(columns =["reviewTime"], inplace = True)
+    df['Fecha']=pd.to_datetime(df['Fecha'].astype(str), format='%Y/%m/%d')
+    return (df)
