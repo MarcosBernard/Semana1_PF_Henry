@@ -38,9 +38,6 @@ for i in range(len(onlyfiles)):
         df = h.helpful_Fecha('./Datasets/ETL/',onlyfiles[i])
         df.to_csv('./Datasets/ETL/{}'.format(onlyfiles[i]),index=False)
 
-
-
-
 # Cargando archivos a GCS
 # Create a new bucket
 h.create_bucket('bucket-pf-henry')
