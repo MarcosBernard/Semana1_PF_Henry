@@ -92,9 +92,9 @@ def parse(path):
 def save_partition(filename,df,chunksnum,type):
     dfout = pd.DataFrame.from_dict(df, orient='index')
     if type == '.csv':
-        dfout.to_csv('./Datasets/CSVs/{}_{}{}'.format(filename.replace('.json.gz',''),chunksnum,type))
+        dfout.to_csv('./Datasets/CSVs/{}_{}{}'.format(filename.replace('.json.gz',''),chunksnum,type),index=False)
     else: 
-        dfout.to_json('./{}_{}{}'.format(filename.replace('.json.gz',''),chunksnum,'.json'))
+        dfout.to_json('./{}_{}{}'.format(filename.replace('.json.gz',''),chunksnum,'.json'),index=False)
     return(True)
 
 def getChunkDF(filepath,filename,chunklen,type='.csv'):
